@@ -20,8 +20,8 @@ After that, you can annotate any function to be cached
 ```java
     @Cached
     public String getFullAddress(Integer id, String language) {
-        // do something to find and calculate the full address
-        String fullAddress = rs.get('address') + rs.get('zip');
+        // do something to find and calculate the full address, like a database query
+        String fullAddress = rs.get("address") + rs.get("zip");
         return fullAddress;
     }
 ```
@@ -35,8 +35,8 @@ It's also possible to set the time to live for a function in the annotation. For
 ```java
     @Cached(timeToLiveSeconds = 3600)
     public String getFullAddress(Integer id, String language) {
-        // do something to find and calculate the full address
-        String fullAddress = rs.get('address') + rs.get('zip');
+        // do something to find and calculate the full address, like a database query
+        String fullAddress = rs.get("address") + rs.get("zip");
         return fullAddress;
     }
 ```
