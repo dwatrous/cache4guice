@@ -2,9 +2,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.cache4guice</groupId>
-  <artifactId>cacheutility</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <groupId>com.github</groupId>
+  <artifactId>cache4guice</artifactId>
+  <version>0.1</version>
   <packaging>jar</packaging>
 
   <name>cache4guice</name>
@@ -22,7 +22,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!--maven variable which points to your local repository -->
-    <internal.repo.path>file:///Users/watrous/Documents/NetBeansProjects/cache4guice/mvn-repo/</internal.repo.path>
+    <internal.repo.path>file:///Users/watrous/Documents/NetBeansProjects/mvn-repo/</internal.repo.path>
   </properties>
   
   <distributionManagement>
