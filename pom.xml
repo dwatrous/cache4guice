@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.cache4guice</groupId>
-  <artifactId>cache4guice</artifactId>
+  <artifactId>cacheutility</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -21,7 +21,17 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!--maven variable which points to your local repository -->
+    <internal.repo.path>file:///Users/watrous/Documents/NetBeansProjects/cache4guice/mvn-repo/</internal.repo.path>
   </properties>
+  
+  <distributionManagement>
+      <repository>
+          <id>internal.repo</id>
+          <name>Internal Repository</name>
+          <url>${internal.repo.path}</url>
+      </repository>
+  </distributionManagement>
 
   <repositories>
       <repository>
