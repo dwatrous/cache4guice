@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.cache4guice</groupId>
+  <artifactId>cacheutility</artifactId>
+  <versioning>
+    <versions>
+      <version>0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20130522212223</lastUpdated>
+  </versioning>
+</metadata>
