@@ -9,5 +9,5 @@ package com.hp.cache4guice.adapters.memcached;
  * @author watrous
  */
 public class MemcachedModule {
-    
+    // create a provider for Memcached connection then setup bindings
 }

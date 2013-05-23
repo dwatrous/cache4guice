@@ -29,7 +29,12 @@ public class MemcachedCache implements CacheAdapter {
     }
 
     public boolean isKeyInCache(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // not ideal, but it's the best we've got with memcached
+        if (c.get(key) == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
     
 }
