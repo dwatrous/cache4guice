@@ -44,7 +44,7 @@ public abstract class TestBaseClass extends TestCase {
             return count.getAndIncrement();
         }
 
-        @Cached(timeToLiveSeconds = 5)
+        @Cached
         public Integer multiArgMethod(Object o, int i, boolean b, String[] c, Map<String, String> map) {
             return count.getAndIncrement();
         }

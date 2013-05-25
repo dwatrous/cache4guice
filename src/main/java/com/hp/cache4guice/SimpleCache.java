@@ -15,6 +15,8 @@
  */
 package com.hp.cache4guice;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.hp.cache4guice.adapters.CacheAdapter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,9 +24,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SimpleCache implements CacheAdapter {
 
     private Map<String, Object> cache;
+    private final int timeToLiveSeconds;
 
-    public SimpleCache() {
+    @Inject
+    public SimpleCache(@Named("timeToLiveSeconds") String timeToLiveSeconds) {
         cache = new ConcurrentHashMap<String, Object>();
+        this.timeToLiveSeconds = Integer.parseInt(timeToLiveSeconds);
     }
 
     @Override
@@ -34,7 +39,7 @@ public class SimpleCache implements CacheAdapter {
 
     @Override
     public void put(String key, Object value) {
-        put(key, value, 0);
+        put(key, value, timeToLiveSeconds);
     }
 
     @Override

@@ -16,6 +16,7 @@
 package com.hp.cache4guice.adapters.infinispan;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.hp.cache4guice.adapters.CacheAdapter;
 import java.util.concurrent.TimeUnit;
 import org.infinispan.Cache;
@@ -23,10 +24,12 @@ import org.infinispan.Cache;
 public class InfinispanCache implements CacheAdapter {
 
     private final Cache<String, Object> cache;
+    private Integer timeToLiveSeconds;
 
     @Inject
-    public InfinispanCache(Cache<String, Object> cache) {
+    public InfinispanCache(Cache<String, Object> cache, @Named("timeToLiveSeconds") String timeToLiveSeconds) {
         this.cache = cache;
+        this.timeToLiveSeconds = Integer.parseInt(timeToLiveSeconds);
     }
 
     @Override
@@ -36,7 +39,7 @@ public class InfinispanCache implements CacheAdapter {
 
     @Override
     public void put(String key, Object value) {
-        put(key, value, 0);
+        put(key, value, timeToLiveSeconds);
     }
 
     @Override

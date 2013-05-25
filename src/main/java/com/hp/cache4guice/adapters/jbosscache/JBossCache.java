@@ -16,18 +16,22 @@
 package com.hp.cache4guice.adapters.jbosscache;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.hp.cache4guice.adapters.CacheAdapter;
+import org.jboss.cache.Cache;
 import org.jboss.cache.Fqn;
 import org.jboss.cache.Node;
 import org.jboss.cache.eviction.ExpirationAlgorithmConfig;
 
 public class JBossCache implements CacheAdapter {
 
-    private final org.jboss.cache.Cache<String, Object> cache;
+    private final Cache<String, Object> cache;
+    private Integer timeToLiveSeconds;
 
     @Inject
-    public JBossCache(org.jboss.cache.Cache<String, Object> cache) {
+    public JBossCache(Cache<String, Object> cache, @Named("timeToLiveSeconds") String timeToLiveSeconds) {
         this.cache = cache;
+        this.timeToLiveSeconds = Integer.parseInt(timeToLiveSeconds);
     }
 
     @Override
@@ -38,7 +42,7 @@ public class JBossCache implements CacheAdapter {
 
     @Override
     public void put(String key, Object value) {
-        put(key, value, 0);
+        put(key, value, timeToLiveSeconds);
     }
 
     @Override

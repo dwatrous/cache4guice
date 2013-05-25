@@ -16,6 +16,7 @@
 package com.hp.cache4guice.aop;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.hp.cache4guice.Cached;
 import com.hp.cache4guice.adapters.CacheAdapter;
 import com.hp.cache4guice.key.KeyGenerator;
@@ -27,6 +28,7 @@ import org.slf4j.LoggerFactory;
 public class CacheInterceptor implements MethodInterceptor {
 
     @Inject private final CacheAdapter cache = null;
+    @Inject @Named("timeToLiveSeconds") private String timeToLiveSeconds;
     private static final Logger LOG = LoggerFactory.getLogger(CacheInterceptor.class);
 
     @Override
@@ -50,7 +52,12 @@ public class CacheInterceptor implements MethodInterceptor {
     }
 
     int getTTL(MethodInvocation methodInvocation) {
-        return getCachedAnnotation(methodInvocation).timeToLiveSeconds();
+        int ttl = getCachedAnnotation(methodInvocation).timeToLiveSeconds();
+        if (ttl > 0) {
+            return ttl;
+        } else {
+            return Integer.parseInt(timeToLiveSeconds);
+        }
     }
 
     String getCacheKey(MethodInvocation methodInvocation) throws Throwable {

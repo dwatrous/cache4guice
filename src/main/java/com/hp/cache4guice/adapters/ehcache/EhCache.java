@@ -16,16 +16,20 @@
 package com.hp.cache4guice.adapters.ehcache;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.hp.cache4guice.adapters.CacheAdapter;
+import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
 public class EhCache implements CacheAdapter {
 
-    private final net.sf.ehcache.Cache cache;
+    private final Cache cache;
+    private int timeToLiveSeconds;
 
     @Inject
-    public EhCache(net.sf.ehcache.Cache cache) {
+    public EhCache(Cache cache, @Named("timeToLiveSeconds") String timeToLiveSeconds) {
         this.cache = cache;
+        this.timeToLiveSeconds = Integer.parseInt(timeToLiveSeconds);
     }
 
     @Override
@@ -36,7 +40,7 @@ public class EhCache implements CacheAdapter {
 
     @Override
     public void put(String key, Object value) {
-        put(key, value, 0);
+        put(key, value, timeToLiveSeconds);
     }
 
     @Override
