@@ -20,18 +20,22 @@ import java.util.concurrent.locks.ReentrantLock;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.name.Names;
 import com.hp.cache4guice.Cached;
+import com.hp.cache4guice.adapters.BaseCacheModule;
 import com.hp.cache4guice.adapters.CacheAdapter;
 import com.hp.cache4guice.aop.CacheInterceptor;
 
-public class EhCacheModule extends AbstractModule {
+public class EhCacheModule extends BaseCacheModule {
 
     @Override
     protected void configure() {
+        // load external properties
+        Names.bindProperties(binder(), loadProperties());
+        
         bind(Cache.class).toProvider(CacheProvider.class).in(Singleton.class);
         bind(CacheAdapter.class).to(EhCache.class).in(Singleton.class);
 

@@ -15,17 +15,20 @@
  */
 package com.hp.cache4guice.adapters;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.name.Names;
 import com.hp.cache4guice.Cached;
 import com.hp.cache4guice.SimpleCache;
 import com.hp.cache4guice.aop.CacheInterceptor;
 
-public class Cache4GuiceModule extends AbstractModule {
+public class Cache4GuiceModule extends BaseCacheModule {
 
     @Override
     protected void configure() {
+        // load external properties
+        Names.bindProperties(binder(), loadProperties());
+
         bind(CacheAdapter.class).to(SimpleCache.class).in(Singleton.class);
         
         CacheInterceptor cacheInterceptor = new CacheInterceptor();
